@@ -29,7 +29,7 @@ for i in range(len(cities)):
 
 
 for file in files:
-    sample = pd.read_cv(file)
+    sample = pd.read_csv(file)
     sample.insert(loc=0, column='Type of City', value='ROI')
     sample['Type of City'] = sample['src_city'].apply(ctype)
     sample.insert(loc=1, column='Date', value=sample['date'])
