@@ -60,7 +60,7 @@ for file in files:
     roi_sample['use'] = roi_sample.apply(lambda x: x['category'] in cats, axis=1)
     
     metro_sample_use = metro_sample[metro_sample['use']==True]
-    roi_sample_use = roi_sample[metro_sample['use']==True]
+    roi_sample_use = roi_sample[roi_sample['use']==True]
     
     del metro_sample, roi_sample
     
@@ -72,6 +72,7 @@ for file in files:
     
     pairs = np.unique(np.array(metro_sample_use.set_index(['src_place_id', 'dest_place_id', 'timestamp_iso']).index))
     keylist = list(target_metro.columns)
+    defdict = {key: None for key in keylist}
     
     rows = []
     # processing metro data first
@@ -200,7 +201,7 @@ for file in files:
     f2_list = []
     f3_list = []
     f4_list = []
-    for i in range(1032572, 1032572 + len(target_sample)):
+    for i in range(1032572, 1032572 + len(metro_pre)):
         f1 = f'=IF(BG{i}<>0,IF(D{i}="Chennai",BG{i}-MIN(BG{i}*5%,50),IF(D{i}="Bangalore",BG{i}-MIN(BG{i}*6%,50),IF(D{i}="Mumbai",BG{i}-MIN(BG{i}*1%,50),IF(D{i}="Hyderabad",BG{i}-MIN(BG{i}*4%,40),BG{i})))),BG{i})'
         f2 = f'=IF(BL{i}<>0,IF(D{i}="Chennai",BL{i}-MIN(BL{i}*5%,50),IF(D{i}="Bangalore",BL{i}-MIN(BL{i}*6%,50),IF(D{i}="Mumbai",BL{i}-MIN(BL{i}*1%,50),IF(D{i}="Hyderabad",BL{i}-MIN(BL{i}*4%,40),BL{i})))),BL{i})'
         f3 = f'=IF(BB{i}<>0,IF(D{i}="Hyderabad",BB{i}-MIN(BB{i}*7%,10),IF(D{i}="Chennai",BB{i}-MIN(BB{i}*7%,10),IF(D{i}="Delhi NCR",BB{i}-MIN(BB{i}*7%,10),BB{i}))),BB{i})'
