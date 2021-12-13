@@ -16,7 +16,7 @@ os.chdir('/home/siddharth/uber_auto/input')
 files = os.listdir()
 
 # get city list
-cities = pd.read_excel('/home/siddharth/uber_auto/CityClassification.xlsx', header = 1)
+cities = pd.read_excel('/home/siddharth/uber_auto/CityClassification.xlsx', header = 1, engine='openpyxl')
 cities.drop(columns='Unnamed: 0', inplace = True)
 city = {}
 
